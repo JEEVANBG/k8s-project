@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: profile-app
+  namespace: profile-app
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: profile.example.test
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8000
+          - path: /upload
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-upload
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-profile
+                port:
+                  number: 8080

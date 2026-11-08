@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-profile
+  namespace: profile-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-profile
+  template:
+    metadata:
+      labels:
+        app: frontend-profile
+    spec:
+      containers:
+        - name: nginx
+          image: profile-ui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-profile
+  namespace: profile-app
+spec:
+  selector:
+    app: frontend-profile
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-upload
+  namespace: profile-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-upload
+  template:
+    metadata:
+      labels:
+        app: frontend-upload
+    spec:
+      containers:
+        - name: nginx
+          image: upload-ui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-upload
+  namespace: profile-app
+spec:
+  selector:
+    app: frontend-upload
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

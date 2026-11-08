@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: profile-app
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: profile-app-config
+  namespace: profile-app
+data:
+  AWS_REGION: ap-south-1
+  S3_BUCKET: replace-with-a-private-bucket-name
+  POSTGRES_DB: profile_app
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: profile-api
+  namespace: profile-app
+  # For EKS, annotate with the IAM role ARN configured for S3 object access.
+  # annotations:
+  #   eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<role-name>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Upload document · Local Profile</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Profile setup home"><span class="brand-icon">P</span><span>Profile setup<small>LOCAL DEMO</small></span></a>
+    <span class="local-indicator"><i></i> Private S3 storage</span>
+  </header>
+  <main class="page">
+    <p class="eyebrow">PROFILE ONBOARDING</p>
+    <h1>Upload your document</h1>
+    <p class="intro-copy">Add the document for <strong id="profile-name">your profile</strong> to finish this demo submission.</p>
+    <nav class="stepper" aria-label="Onboarding progress"><span class="step"><i>✓</i>Your details</span><b></b><span class="step current"><i>2</i>Upload document</span></nav>
+    <section class="card">
+      <div class="card-heading"><span class="card-icon">02</span><div><h2>Aadhaar document</h2><p>JPG, PNG, or PDF · maximum 5 MB</p></div></div>
+      <div class="warning"><strong>Development demo</strong><p>Use a dummy document only. The file is uploaded to your private S3 bucket; the app does not extract or store the Aadhaar number.</p></div>
+      <form id="upload-form">
+        <label class="file-picker" for="document">
+          <span class="upload-icon">↑</span><strong id="file-name">Choose a file</strong><small>JPG, PNG, or PDF up to 5 MB</small>
+          <input id="document" name="document" type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" required>
+        </label>
+        <label class="check-row"><input id="consent" type="checkbox" required><span>I am authorized to upload this document and understand it will be stored in a private S3 bucket.</span></label>
+        <p id="error" class="error" role="alert" hidden></p>
+        <div id="success" class="success" role="status" hidden></div>
+        <button id="submit" class="primary" type="submit">Upload document securely <span>→</span></button>
+      </form>
+    </section>
+    <p class="notice"><strong>Security note</strong><br>This demo has no user login. The bucket must block public access and use least-privilege AWS permissions. Do not upload real identity documents to an unreviewed deployment.</p>
+    <p class="footer">The document is stored in S3; only its S3 object key and metadata are saved in the database.</p>
+  </main>
+</body>
+</html>
