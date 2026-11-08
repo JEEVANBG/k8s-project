@@ -1,0 +1,18 @@
+
+Master Node:
+If it is -private repo-generate the token:
+curl -fL 'https://raw.githubusercontent.com/JEEVANBG/PETSHOP/refs/heads/main/cluster_setup_using_kubeadm_1.36.sh?token=GHSAT0AAAAAAEPMPQLTWOCYCJ2YTZIAB4IY2XP3SUQ
+' -o cluster_setup.sh
+
+If it is public repo - no token needed:
+curl -fL 'https://raw.githubusercontent.com/JEEVANBG/PETSHOP/refs/heads/main/cluster_setup_using_kubeadm_1.36.sh' -o cluster_setup.sh
+
+then exec - ./cluster_setup.sh master
+
+Run below command on master to generate the token to add the worker node
+
+
+Run below command on worker to add the worker to master - same condition for private and public repo
+curl -fL 'https://raw.githubusercontent.com/JEEVANBG/PETSHOP/refs/heads/main/cluster_setup_using_kubeadm_1.36.sh?token=GHSAT0AAAAAAENTQKBNKTIJSCDRTI5QQQNE2W4WDKQ' -o cluster_setup.sh
+
+then exec - ./cluster_setup.sh worker
